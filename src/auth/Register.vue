@@ -1,56 +1,56 @@
 <template>
-  <div>
+  <div id="regForm">
     <h1>Register your free account</h1>
     <form @submit.prevent="registerFormHandler">
       <div class="form-group">
         <label for="name">Name:</label>
-        <input id="name" type="text" v-model="name" @blur="$v.name.$touch" />
+        <input id="name" type="text" v-model="$v.name.$model"/>
         <template v-if="$v.name.$error">
-            <span class="alert" v-if="!$v.name.required">The name is required</span>
-            <span class="alert" v-else-if="!$v.name.minLength">The name must be min 3 chars</span>
+            <p class="alert" v-if="!$v.name.required">The name is required</p>
+            <p class="alert" v-else-if="!$v.name.minLength">The name must be min 3 chars</p>
         </template>
       </div>
       <div class="form-group">
         <label for="email">Email:</label>
-        <input id="email" type="email" v-model="email" @blur="$v.email.$touch"/>
+        <input id="email" type="email" v-model="$v.email.$model"/>
         <template v-if="$v.email.$error">
-            <span class="alert" v-if="!$v.email.required">The email is required</span>
-            <span class="alert" v-else-if="!$v.email.email">Not valid email</span>
+            <p class="alert" v-if="!$v.email.required">The email is required</p>
+            <p class="alert" v-else-if="!$v.email.email">Not valid email</p>
         </template>
       </div>
       <div class="form-group">
         <label for="imgUrl">Image url:</label>
-        <input id="imgUrl" type="url" v-model="imgUrl" @blur="$v.imgUrl.$touch" />
+        <input id="imgUrl" type="url" v-model="$v.imgUrl.$model"/>
         <template v-if="$v.imgUrl.$error">
-            <span class="alert" v-if="!$v.imgUrl.required">The image url is required</span>
-            <span class="alert" v-else-if="!$v.imgUrl.url">Not valid url</span>
+            <p class="alert" v-if="!$v.imgUrl.required">The image url is required</p>
+            <p class="alert" v-else-if="!$v.imgUrl.url">Not valid url</p>
         </template>
       </div>
       <div class="form-group">
         <label for="password">Password:</label>
-        <input id="password" type="password" v-model="password" @blur="$v.password.$touch"/>
+        <input id="password" type="password" v-model="$v.password.$model"/>
         <template v-if="$v.password.$error">
-            <span class="alert" v-if="!$v.password.required">The password is required</span>
-            <span class="alert" v-else-if="!$v.password.minLength">Password must be minimum 8 symbols</span>
-            <span class="alert" v-else-if="!$v.password.maxLength">Password must be maximum 16 symbols</span>
+            <p class="alert" v-if="!$v.password.required">The password is required</p>
+            <p class="alert" v-else-if="!$v.password.minLength">Password must be minimum 8 symbols</p>
+            <p class="alert" v-else-if="!$v.password.maxLength">Password must be maximum 16 symbols</p>
         </template>
       </div>
       <div class="form-group">
         <label for="rePassword">Repeat - password:</label>
         <input id="rePassword" type="password" v-model.trim="$v.rePassword.$model" />
         <template v-if="$v.rePassword.$error">
-            <span class="alert" v-if="!$v.rePassword.sameAsPass">Passwords is not the same</span>
+            <p class="alert" v-if="!$v.rePassword.sameAsPass">Passwords is not the same</p>
         </template>
       </div>
-      <button :disabled="$v.$invalid">Submit</button>
+      <button :disabled="$v.$invalid">Register</button>
     </form>
+    <p><router-link to="/login">You have account? Login now</router-link></p>
   </div>
 </template>
 
 <script>
 import { validationMixin } from 'vuelidate';
 import { required, minLength, maxLength, email, url, sameAs } from 'vuelidate/lib/validators';
-//import { helpers } from 'vuelidate/lib/validators';
 export default {
 mixins: [validationMixin],
   data() {
@@ -93,41 +93,62 @@ mixins: [validationMixin],
 </script>
 
 <style scoped>
+#wrapper {
+  width: 1280px;
+  margin: 0 auto;
+}
+#regForm {
+  width: 50%;
+  margin: 30px auto;
+  background-color: white;
+  padding: 30px;
+}
 input {
-  width: 200px;
-  padding: 7px 10px;
-  margin: 10px;
+  width: 100%;
+  padding: 7px 0;
+  margin:  0;
   display: inline-block;
-  border: 1px solid green;
-  border-radius: 10px;
+  border: none;
+  border-bottom: 1px solid #42b983;
 }
 
 label {
-  width: 100px;
-  padding: 7px 10px;
   display: inline-block;
-  background-color: green;
-  border-radius: 10px;
   font-size: 16px;
-  color: white;
+  color: #42b983;
   cursor: pointer;
 }
 button {
+  width: 100%;
+  margin: 10px 0;
   padding: 7px 40px;
+  border: none;
   display: inline-block;
-  background-color: transparent;
-  border: 2px solid green;
-  border-radius: 10px;
-  color: green;
+  background-color: #42b983;
+  color: white;
   font-size: 16px;
   cursor: pointer;
 }
-button:disabled {
-  border: 2px solid grey;
-  color: grey;
-  cursor:progress;
+button:disabled {   
+    border: none;
+  background-color: #eee;
+  color: #42b983;
+  cursor: progress;
 }
 .alert {
-    color: red;
+  color: red;
+  padding: 0;
+  margin: 0 0 10px 0;
+  font-size: smaller;
+}
+.form-group {
+  margin: 20px 0;
+}
+a {
+    text-decoration: none;
+    color: #42b983;
+}
+h1 {
+    text-align: center;
 }
 </style>

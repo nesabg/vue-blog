@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <app-register></app-register>
+    <app-navigation></app-navigation>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Register from "./auth/Register.vue";
+import Navigation from "./shared/Navigation.vue";
 
 export default {
   name: "App",
 
   components: {
-    AppRegister: Register
+    AppNavigation: Navigation
   },
 
   data: () => ({
@@ -20,12 +21,4 @@ export default {
 };
 </script>
 <style>
-
-#app {
-  width: 1280px;
-  margin: 0 auto;
-  font-family: 'Courier New', Courier, monospace;
-}
-
-
 </style>

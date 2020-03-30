@@ -1,6 +1,8 @@
 <template>
   <div>
-      <h1>User detail</h1>
+      <h1>
+          Home component
+      </h1>
   </div>
 </template>
 
