@@ -4,7 +4,7 @@
       <div>
         <ul>
           <li>
-            <router-link to="/foo">Home</router-link>
+            <router-link to="/">Home</router-link>
           </li>
           <li>
             <router-link to="/foo">VueJS</router-link>
@@ -16,15 +16,23 @@
             <router-link to="/foo">React</router-link>
           </li>
         </ul>
-        <ul class="right">
-          <li>
-            <router-link to="/create-topic">Create topic</router-link>
-          </li>
+        <ul class="right" v-if="!isLoggedIn">
           <li>
             <router-link to="/login">Login</router-link>
           </li>
           <li>
             <router-link to="/register">Register</router-link>
+          </li>
+        </ul>
+        <ul class="right" v-else-if="isLoggedIn">
+          <li>
+            <router-link to="/user-detail">User detail</router-link>
+          </li>
+          <li>
+            <router-link to="/create-topic">Create topic</router-link>
+          </li>
+          <li>
+            <button @click="logout">Logout</button>
           </li>
         </ul>
       </div>
@@ -33,7 +41,30 @@
 </template>
 
 <script>
-export default {};
+import firebase from "firebase/app";
+
+export default {
+  data() {
+    return {};
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn;
+    }
+  },
+  methods: {
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$store.state.isLoggedIn = false;
+          this.$router.replace("/");
+        });
+      console.log("clicked");
+    }
+  }
+};
 </script>
 
 <style scoped>
