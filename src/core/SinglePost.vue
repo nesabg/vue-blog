@@ -5,7 +5,7 @@
         <img :src="getPost.imgUrl" alt />
         <template v-if="abbleToEdit">
           <span>
-            <button id="edit">Edit post</button>
+            <router-link :to="'/edit-post/' + id"><button id="edit">Edit post</button></router-link>
           </span>
           <span>
             <button id="delete" @click="deletePost">Delete post</button>

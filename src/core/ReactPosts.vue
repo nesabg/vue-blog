@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
       <h1>React Posts</h1>
-      <router-link v-for="post in posts" :key="post.uid" :to="'/singlePost/' + post.uid">
+      <router-link v-for="post in posts" :key="post.uid" :to="'/single-post/' + post.uid">
           <div class="singlePost">
               <img :src="post.imgUrl" alt="">
               <div><h2>{{post.title}}</h2></div>

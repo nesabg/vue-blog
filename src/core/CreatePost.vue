@@ -1,8 +1,8 @@
 <template>
-    <div class="wrapper">
+    <div id="wrapper">
       <div id="topicForm">
-        <h1>Create topic</h1>
-        <form @submit.prevent="createTopicHandler">
+        <h1>Create post</h1>
+        <form @submit.prevent="create">
           <div class="form-group">
             <label for="title">Title:</label>
             <input id="title" type="text" v-model="$v.title.$model" />
@@ -41,7 +41,7 @@
               <p class="alert" v-if="!$v.category.required">You must select a category</p>
             </template>
           </div>
-          <button :disabled="$v.$invalid">Create topic</button>
+          <button :disabled="$v.$invalid">Create post</button>
         </form>
       </div>
     </div>
@@ -54,17 +54,38 @@ import {
   minLength,
   maxLength,
   url
-  //sameAs
 } from "vuelidate/lib/validators";
+import { db } from "../main";
 export default {
   mixins: [validationMixin],
   data() {
     return {
-      title: "TEST",
+      title: "",
       content: "",
       imgUrl: "",
       category: ""
     };
+  },
+  methods: {
+    create() {
+      let data = {
+        title: this.title,
+        content: this.content,
+        imgUrl: this.imgUrl,
+        category: this.category,
+        comments: [],
+        authorId: this.$store.state.user.uid,
+        authorName: this.$store.state.user.publicName
+      }
+      db.collection(`categories`).add(data).then(
+        res => {
+          console.log(res);
+          this.$router.replace('/');
+        }
+      ).catch(err => {
+        console.log(err);
+      })
+    }
   },
   validations: {
     title: {

@@ -5,10 +5,10 @@ import Home from "./core/Home.vue";
 import Register from "./auth/Register.vue";
 import Login from "./auth/Login.vue";
 import UserDetail from "./auth/UserDetail.vue";
-import CreateTopic from "./core/CreateTopic.vue";
-import EditTopic from "./core/EditTopic.vue";
+import CreatePost from "./core/CreatePost.vue";
+import EditPost from "./core/EditPost.vue";
 import ReactPosts from "./core/ReactPosts.vue";
-import SinglePost from "./core/SinglePost.vue"
+import SinglePost from "./core/SinglePost.vue";
 
 Vue.use(VueRouter);
 
@@ -50,8 +50,8 @@ export default new VueRouter({
       }
     },
     {
-      path: "/create-topic",
-      component: CreateTopic,
+      path: "/create-post",
+      component: CreatePost,
       beforeEnter: (to, from, next) => {
         if (store.state.isLoggedIn) {
           next(true);
@@ -61,17 +61,18 @@ export default new VueRouter({
       }
     },
     {
-      path: "/edit-topic",
-      component: EditTopic,
+      path: "/edit-post/:id",
+      component: EditPost,
       beforeEnter: (to, from, next) => {
         if (store.state.isLoggedIn) {
           next(true);
         } else {
           next("/login");
         }
-      }
+      },
+      props: true
     },
     { path: "/react-posts", component: ReactPosts },
-    {path: "/singlePost/:id", component: SinglePost, props: true}
+    { path: "/single-post/:id", component: SinglePost, props: true }
   ]
 });

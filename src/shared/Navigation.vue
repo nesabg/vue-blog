@@ -7,10 +7,10 @@
             <router-link to="/">Home</router-link>
           </li>
           <li>
-            <router-link to="/foo">VueJS</router-link>
+            <router-link to="/vuejs-posts">VueJS</router-link>
           </li>
           <li>
-            <router-link to="/foo">Angular</router-link>
+            <router-link to="/angular-posts">Angular</router-link>
           </li>
           <li>
             <router-link to="/react-posts">React</router-link>
@@ -26,11 +26,12 @@
         </ul>
         <ul class="right" v-else-if="isLoggedIn">
           <li>
-            <router-link to="/user-detail">User detail</router-link>
+            <router-link to="/create-post">Create post</router-link>
           </li>
           <li>
-            <router-link to="/create-topic">Create topic</router-link>
+            <router-link to="/user-detail">User detail</router-link>
           </li>
+
           <li>
             <button @click="logout">Logout</button>
           </li>

@@ -1,8 +1,8 @@
 <template>
-    <div id="wrapper">
+    <div class="wrapper">
       <div id="topicForm">
-        <h1>Create topic</h1>
-        <form @submit.prevent="create">
+        <h1>Edit post</h1>
+        <form @submit.prevent="editPost">
           <div class="form-group">
             <label for="title">Title:</label>
             <input id="title" type="text" v-model="$v.title.$model" />
@@ -55,9 +55,10 @@ import {
   maxLength,
   url
 } from "vuelidate/lib/validators";
-import { db } from "../main";
+import { db } from '../main';
 export default {
   mixins: [validationMixin],
+  props: ['id'],
   data() {
     return {
       title: "",
@@ -67,25 +68,25 @@ export default {
     };
   },
   methods: {
-    create() {
+    editPost() {
       let data = {
         title: this.title,
         content: this.content,
         imgUrl: this.imgUrl,
         category: this.category,
-        comments: [],
-        authorId: this.$store.state.user.uid,
-        authorName: this.$store.state.user.publicName
       }
-      db.collection(`categories`).add(data).then(
-        res => {
-          console.log(res);
-          this.$router.replace('/');
-        }
-      ).catch(err => {
-        console.log(err);
+      db.collection('categories').doc(this.id).set(data, {merge: true}).then(() => {
+        let url = '/single-post/' + this.id;
+        this.$router.replace(url)
       })
     }
+  },
+  created(){
+    let data = this.$store.state.posts.filter(post => post.uid == this.id)[0];
+    this.title = data.title,
+    this.content = data.content,
+    this.imgUrl = data.imgUrl,
+    this.category = data.category
   },
   validations: {
     title: {
