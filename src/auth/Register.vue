@@ -1,5 +1,5 @@
 <template>
-  <div id="regForm">
+  <div id="regForm" class="wrapper">
     <h1>Register your free account</h1>
     <form @submit.prevent="registerFormHandler">
       <div class="form-group">

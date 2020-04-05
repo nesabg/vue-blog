@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <div id="wrapper">
+    <div class="wrapper">
       <div id="topicForm">
         <h1>Create topic</h1>
         <form @submit.prevent="createTopicHandler">
@@ -46,7 +45,6 @@
         </form>
       </div>
     </div>
-  </div>
 </template>
 
 <script>

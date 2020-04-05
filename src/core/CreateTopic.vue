@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div id="wrapper">
       <div id="topicForm">
         <h1>Create topic</h1>
@@ -46,7 +45,6 @@
         </form>
       </div>
     </div>
-  </div>
 </template>
 
 <script>

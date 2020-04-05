@@ -1,27 +1,29 @@
 <template>
-  <div>
-    <div id="wrapper">
-      <h1>Detail page for user: {{ userData.publicName }}</h1>
+  <div class="wrapper">
+    <h1>Detail page for user: {{ userData.publicName }}</h1>
     <div>
-      <img :src="userData.imageURL" alt="">
+      <img :src="userData.imageURL" alt />
       <h4>Phone number: {{ userData.phone }}</h4>
       <h4>Email addres: {{ userData.Email }}</h4>
-      <p>Description:<br> {{ userData.description}}</p>
+      <p>
+        Description:
+        <br />
+        {{ userData.description}}
+      </p>
       <button id="edit">Edit profile</button>
       <button id="delete">Delete profile</button>
-    </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-computed: {
-  userData() {
-    return this.$store.state.user;
+  computed: {
+    userData() {
+      return this.$store.state.user;
+    }
   }
-}
-}
+};
 </script>
 
 <style scoped>

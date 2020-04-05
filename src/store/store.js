@@ -1,11 +1,13 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { db } from '../main';
+import { db } from "../main";
+//import firebase from "firebase/app";
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
+    posts: [],
     user: {
       uid: "",
       publicName: "",
@@ -16,14 +18,23 @@ export const store = new Vuex.Store({
     },
     isLoggedIn: false
   },
+  getters:{
+
+  },
   mutations: {
-    updateUser(state, payload) {
-        db.collection(`users`).doc(payload).get().then(res => {
-            state.user = Object.assign({}, state.user, res.data());
-        })
+    updateUser(state, payload) { 
+      db.collection(`users`)
+        .doc(payload)
+        .get()
+        .then(res => {
+          state.user = Object.assign({}, state.user, res.data());
+        });
     },
     login(state) {
       state.isLoggedIn = true;
+    },
+    getPost(state, posts) {
+      state.posts = posts;
     }
   },
   actions: {
@@ -32,6 +43,20 @@ export const store = new Vuex.Store({
     },
     updateUser(context, payload) {
       context.commit("updateUser", payload);
+    },
+    fetchPosts({ commit }) {
+      db.collection("categories")
+        .onSnapshot(querySnapshot => {
+          let posts = [];
+          querySnapshot.forEach(doc => {
+            let data = doc.data();
+            data.uid = doc.id;
+            posts.push(data);
+          });
+          commit("getPost", posts);
+        });
     }
   }
 });
+
+//store.dispatch("fetchPosts");

@@ -13,7 +13,7 @@
             <router-link to="/foo">Angular</router-link>
           </li>
           <li>
-            <router-link to="/foo">React</router-link>
+            <router-link to="/react-posts">React</router-link>
           </li>
         </ul>
         <ul class="right" v-if="!isLoggedIn">

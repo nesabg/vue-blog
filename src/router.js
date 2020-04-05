@@ -7,6 +7,8 @@ import Login from "./auth/Login.vue";
 import UserDetail from "./auth/UserDetail.vue";
 import CreateTopic from "./core/CreateTopic.vue";
 import EditTopic from "./core/EditTopic.vue";
+import ReactPosts from "./core/ReactPosts.vue";
+import SinglePost from "./core/SinglePost.vue"
 
 Vue.use(VueRouter);
 
@@ -68,6 +70,8 @@ export default new VueRouter({
           next("/login");
         }
       }
-    }
+    },
+    { path: "/react-posts", component: ReactPosts },
+    {path: "/singlePost/:id", component: SinglePost, props: true}
   ]
 });

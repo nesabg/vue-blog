@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <div id="wrapper">
+    <div class="wrapper">
       <div id="loginForm">
         <h1>Login to this Blog</h1>
         <form @submit.prevent="loginHandler">
@@ -29,7 +28,6 @@
         <p><router-link to="/register">Don`t have account? Register now</router-link></p>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -50,8 +48,8 @@ export default {
     loginHandler() {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password)
         .then(res => {
+          this.$store.commit('login');
             this.$store.commit('updateUser', res.user.uid);
-            this.$store.commit('login');
             this.$router.replace('/')
         }).catch(err => {
             alert(err);
