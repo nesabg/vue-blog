@@ -8,7 +8,7 @@
             <button id="edit">Edit post</button>
           </span>
           <span>
-            <button id="delete">Delete post</button>
+            <button id="delete" @click="deletePost">Delete post</button>
           </span>
         </template>
       </div>
@@ -43,8 +43,11 @@
         <div class="comments right-side">
           <h3>Comments:</h3>
           <div class="singleComment" v-for="(comment, i) in getPost.comments" :key="i">
-              <h4><em>Author of comment:</em> {{ comment.name }}</h4>
-              <p>{{ comment.comment}}</p>
+            <h4>
+              <em>Author of comment:</em>
+              {{ comment.name }}
+            </h4>
+            <p>{{ comment.comment}}</p>
           </div>
         </div>
       </div>
@@ -75,10 +78,25 @@ export default {
       };
       db.collection("categories")
         .doc(this.id)
-        .update({ comments: firebase.firestore.FieldValue.arrayUnion(data) }).then(() => {
-            this.name = '';
-            this.comment = '';
-        })
+        .update({ comments: firebase.firestore.FieldValue.arrayUnion(data) })
+        .then(() => {
+          this.name = "";
+          this.comment = "";
+        });
+    },
+    deletePost() {
+      if (confirm("Are you sure want to delete this post?")) {
+        db.collection("categories")
+          .doc(this.id)
+          .delete()
+          .then(res => {
+            console.log(res);
+            this.$router.replace('/');
+          })
+          .catch(err => {
+            alert(err);
+          });
+      }
     }
   },
   computed: {
@@ -89,7 +107,7 @@ export default {
       return this.$store.state.isLoggedIn;
     },
     abbleToEdit() {
-        return this.getPost.authorId == this.$store.state.user.uid
+      return this.getPost.authorId == this.$store.state.user.uid;
     }
   },
   validations: {
