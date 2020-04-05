@@ -10,22 +10,31 @@
     <div class="vuejs">
       <h2>Recent post from VueJS</h2>
       <div class="single-item" v-for="post in getVueData" :key="post.uid">
+        <router-link :to="'/single-post/' + post.uid">
+        <div class="div-img"><img :src="post.imgUrl" alt=""></div>
         <h3>{{post.title}}</h3>
         <p>{{post.content | sliceData}}</p>
+        </router-link>
       </div>
     </div>
     <div class="angular">
       <h2>Recent post from Angular</h2>
-      <div class="single-item" v-for="post in getNgData" :key="post.uid">
+       <div class="single-item" v-for="post in getNgData" :key="post.uid">
+        <router-link :to="'/single-post/' + post.uid">
+        <div class="div-img"><img :src="post.imgUrl" alt=""></div>
         <h3>{{post.title}}</h3>
         <p>{{post.content | sliceData}}</p>
+        </router-link>
       </div>
     </div>
     <div class="react">
       <h2>Recent post from React</h2>
       <div class="single-item" v-for="post in getReactData" :key="post.uid">
+        <router-link :to="'/single-post/' + post.uid">
+        <div class="div-img"><img :src="post.imgUrl" alt=""></div>
         <h3>{{post.title}}</h3>
         <p>{{post.content | sliceData}}</p>
+        </router-link>
       </div>
     </div>
   </div>
@@ -66,24 +75,42 @@ export default {
 
 <style scoped>
 .header {
-  width: 70%;
   margin: 30px auto;
-  padding: 20px;
+  padding: 30px 150px;
   background-color: white;
   text-align: center;
 }
 h1,h2,h3,h4 {
   color: #42b983;
 }
+h2 {
+  color: white;
+  padding: 10px 0;
+  background-color: #42b983;
+  text-align: center;
+}
 .single-item {
   width: 27%;
-  height: 180px;
-  vertical-align: top;
+  height: 360px;
   margin: 15px;
   padding: 15px;
   display: inline-block;
+  text-align: center;
+  vertical-align: top;
   background-color: white;
-  border-radius: 20px;
   box-shadow: 0 0 10px -6px #000000;
+}
+.div-img {
+  width: 80%;
+  height: 180px;
+  margin: 0 auto;
+  padding: 10px;
+  display: inline-block;
+}
+img {
+  width: 100%;
+}
+.vuejs, .angular, .react {
+  text-align: center;
 }
 </style>

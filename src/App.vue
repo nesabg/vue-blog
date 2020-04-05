@@ -17,19 +17,19 @@ export default {
 
   data: () => ({
     //
-  }),
+  })
 };
 </script>
 <style>
-  .wrapper {
-    width: 1280px;
-    margin: 0 auto;
-  }
-  a {
-    text-decoration: none;
-    color: black;
-  }
-  #edit {
+.wrapper {
+  width: 1280px;
+  margin: 0 auto;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+#edit {
   width: 40%;
   margin: 10px 30px 10px 0;
   padding: 7px 40px;
@@ -50,6 +50,10 @@ export default {
   color: white;
   font-size: 16px;
   cursor: pointer;
+}
+.single-post {
+  -webkit-clip-path: polygon(85% 0, 100% 13%, 100% 100%, 15% 100%, 0 86%, 0 0);
+  clip-path: polygon(85% 0, 100% 13%, 100% 100%, 15% 100%, 0 86%, 0 0);
 }
 </style>>
 

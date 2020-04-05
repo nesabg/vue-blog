@@ -1,11 +1,13 @@
 <template>
   <div class="wrapper">
-    <div class="section">
+    <div class="section" v-if="getPost">
       <div class="left-side">
         <img :src="getPost.imgUrl" alt />
         <template v-if="abbleToEdit">
           <span>
-            <router-link :to="'/edit-post/' + id"><button id="edit">Edit post</button></router-link>
+            <router-link :to="'/edit-post/' + id">
+              <button id="edit">Edit post</button>
+            </router-link>
           </span>
           <span>
             <button id="delete" @click="deletePost">Delete post</button>
@@ -14,12 +16,14 @@
       </div>
       <div class="right-side">
         <h1>{{ getPost.title }}</h1>
-        <p>{{ getPost.content }}</p>
+        <p id="content">{{ getPost.content }}</p>
         <div class="author">
-          <span>Author: {{ getPost.authorName}}</span>
+          <span>Author: <span id="auth-name">{{ getPost.authorName}}</span></span>
           <span>
             Category:
-            <strong>{{ getPost.category}}</strong>
+            <strong>
+              <router-link :to="'/' + getPost.category + '-posts'">{{ getPost.category}}</router-link>
+            </strong>
           </span>
         </div>
       </div>
@@ -42,18 +46,18 @@
         </div>
         <div class="comments right-side">
           <h3>Comments:</h3>
-          <div class="singleComment" v-for="(comment, i) in getPost.comments" :key="i">
-            <h4>
-              <em>Author of comment:</em>
-              {{ comment.name }}
-            </h4>
+          <div class="single-comment" v-for="(comment, i) in getPost.comments" :key="i">
             <p>{{ comment.comment}}</p>
+            <h4>
+              <em>by: </em>
+              <span>{{ comment.name }}</span>
+            </h4>
           </div>
         </div>
       </div>
     </template>
     <template v-else>
-        <p>Register and login to see comments of this blog</p>
+      <p>Register and login to see comments of this blog</p>
     </template>
   </div>
 </template>
@@ -94,7 +98,7 @@ export default {
           .delete()
           .then(res => {
             console.log(res);
-            this.$router.replace('/');
+            this.$router.replace("/");
           })
           .catch(err => {
             alert(err);
@@ -140,11 +144,14 @@ export default {
 }
 .left-side img {
   width: 100%;
+  margin-top: 30px;
 }
 .right-side {
-  display: flexbox;
+  display: inline-block;
   width: 50%;
-  padding: 20px;
+  background: white;
+  margin-top: 20px;
+  padding: 0 20px 20px 20px;
   vertical-align: top;
 }
 .author span {
@@ -188,5 +195,21 @@ button {
   color: white;
   font-size: 16px;
   cursor: pointer;
+}
+h1 {
+  text-align: center;
+  color: #42b983;
+}
+.author a, #auth-name, h4 > span {
+  color: orange;
+}
+#content {
+  text-align: justify;
+  line-height: 1.7;
+}
+.single-comment {
+  border: 1px solid #42b983;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 </style>

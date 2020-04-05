@@ -33,7 +33,7 @@
           </li>
 
           <li>
-            <button @click="logout">Logout</button>
+            <a @click.prevent="logout">Logout</a>
           </li>
         </ul>
       </div>
@@ -87,8 +87,8 @@ li {
 a {
   color: white;
   padding: 5px 15px;
-  border-radius: 10px;
   text-decoration: none;
+  cursor: pointer;
   transition: all 0.5s ease-in-out;
 }
 a:hover {
