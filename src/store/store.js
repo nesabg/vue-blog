@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { db } from "../main";
-//import firebase from "firebase/app";
 
 Vue.use(Vuex);
 
