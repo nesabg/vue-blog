@@ -9,6 +9,8 @@ import CreatePost from "./core/CreatePost.vue";
 import EditPost from "./core/EditPost.vue";
 import ReactPosts from "./core/ReactPosts.vue";
 import SinglePost from "./core/SinglePost.vue";
+import AngularPosts from "./core/AngularPosts.vue";
+import VuejsPosts from "./core/VuejsPosts.vue";
 
 Vue.use(VueRouter);
 
@@ -73,6 +75,8 @@ export default new VueRouter({
       props: true
     },
     { path: "/react-posts", component: ReactPosts },
+    { path: "/angular-posts", component: AngularPosts },
+    { path: "/vuejs-posts", component: VuejsPosts },
     { path: "/single-post/:id", component: SinglePost, props: true }
   ]
 });

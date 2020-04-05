@@ -52,6 +52,9 @@
         </div>
       </div>
     </template>
+    <template v-else>
+        <p>Register and login to see comments of this blog</p>
+    </template>
   </div>
 </template>
 
