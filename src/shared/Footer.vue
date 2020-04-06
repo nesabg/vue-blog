@@ -1,6 +1,6 @@
 <template>
   <div>
-      <p>This is project for Softuni course - VueJs 2020 - username nesabg</p>
+      <p>This is project for Softuni course - VueJs 2020 - username: nesabg</p>
   </div>
 </template>
 
