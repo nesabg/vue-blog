@@ -8,7 +8,7 @@
             <h2><router-link :to="'/single-post/' + post.uid">{{post.title}}</router-link></h2>
           </div>
           <div>
-            <p>{{ post.content | descLenght }}</p>
+            <p>{{ post.content | reduceLength }}</p>
           </div>
           <div>
             <router-link class="btn" :to="'/single-post/' + post.uid">Read more</router-link>
@@ -28,16 +28,13 @@ export default {
   data() {
     return {};
   },
-  created() {
-    this.$store.dispatch("fetchPosts");
-  },
   computed: {
     posts() {
-      return this.$store.state.posts.filter(post => post.category == "vuejs");
+      return this.$store.getters.getCategoryPost('vuejs');
     }
   },
   filters: {
-    descLenght(val) {
+    reduceLength(val) {
       return val.slice(0, 100) + "...";
     }
   }
@@ -47,25 +44,6 @@ export default {
 <style scoped>
 p {
     margin-bottom: 30px;
-}
-.single-post {
-  width: 100%;
-  height: 200px;
-  display: inline-block;
-  margin: 10px auto;
-  padding: 30px;
-  background-color: white;
-  text-align: left;
-  vertical-align: top;
-  box-shadow: 0 0 10px -6px #000000;
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
-}
-.singlePost:hover {
-  transform: scale(1.01);
-}
-.singlePost h2 a{
-  color: #42b983;
 }
 .img {
   width: 30%;
@@ -80,12 +58,6 @@ p {
   text-decoration: none !important;
   border: none !important;
   background-color: transparent !important;
-}
-.content {
-  width: 60%;
-  padding: 20px 40px;
-  display: inline-block;
-  vertical-align: top;
 }
 a:hover {
     text-decoration: underline;
@@ -102,8 +74,5 @@ a.btn:hover {
     background-color: #42b983;
     text-decoration: none;
 }
-.author {
-    float: right;
-    color: red; 
-}
+
 </style>

@@ -2,7 +2,7 @@
     <div class="wrapper">
       <div id="topicForm">
         <h1>Create post</h1>
-        <form @submit.prevent="create">
+        <form @submit.prevent="createPost">
           <div class="form-group">
             <label for="title">Title:</label>
             <input id="title" type="text" v-model="$v.title.$model" />
@@ -48,16 +48,11 @@
 </template>
 
 <script>
-import { validationMixin } from "vuelidate";
-import {
-  required,
-  minLength,
-  maxLength,
-  url
-} from "vuelidate/lib/validators";
 import { db } from "../main";
+import createEditValidationsMixin from '../mixins/validatators';
+
 export default {
-  mixins: [validationMixin],
+  mixins: [createEditValidationsMixin],
   data() {
     return {
       title: "",
@@ -67,7 +62,7 @@ export default {
     };
   },
   methods: {
-    create() {
+    createPost() {
       let data = {
         title: this.title,
         content: this.content,
@@ -78,34 +73,14 @@ export default {
         authorName: this.$store.state.user.publicName
       }
       db.collection(`categories`).add(data).then(
-        res => {
-          console.log(res);
+        () => {
           this.$router.replace('/');
         }
       ).catch(err => {
-        console.log(err);
+        alert(err);
       })
     }
   },
-  validations: {
-    title: {
-      required,
-      minLength: minLength(3),
-      maxLength: maxLength(64)
-    },
-    content: {
-      required,
-      minLength: minLength(64),
-      maxLength: maxLength(2000)
-    },
-    imgUrl: {
-      required,
-      url
-    },
-    category: {
-      required
-    }
-  }
 };
 </script>
 

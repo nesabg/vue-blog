@@ -103,9 +103,8 @@ export default {
           this.$router.replace("/login");
         })
         .catch(err => {
-          console.error(err);
+          alert(err);
         });
-      console.log("Form send");
     },
     setUserData(user) {
       const userRef = db.doc(`users/${user.uid}`);

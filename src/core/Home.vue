@@ -42,27 +42,18 @@
 
 <script>
 export default {
-  created() {
-    this.$store.dispatch("fetchPosts");
-  },
   computed: {
     posts() {
       return this.$store.state.posts;
     },
     getVueData() {
-      return this.$store.state.posts
-        .filter(post => post.category == "vuejs")
-        .slice(-3);
+      return this.$store.getters.getCategoryPost('vuejs').slice(-3);
     },
     getNgData() {
-      return this.$store.state.posts
-        .filter(post => post.category == "angular")
-        .slice(-3);
+      return this.$store.getters.getCategoryPost('angular').slice(-3);
     },
     getReactData() {
-      return this.$store.state.posts
-        .filter(post => post.category == "react")
-        .slice(-3);
+      return this.$store.getters.getCategoryPost('react').slice(-3);
     }
   },
   filters: {

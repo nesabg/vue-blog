@@ -18,7 +18,10 @@
         <h1>{{ getPost.title }}</h1>
         <p id="content">{{ getPost.content }}</p>
         <div class="author">
-          <span>Author: <span id="auth-name">{{ getPost.authorName}}</span></span>
+          <span>
+            Author:
+            <span id="auth-name">{{ getPost.authorName}}</span>
+          </span>
           <span>
             Category:
             <strong>
@@ -46,7 +49,7 @@
             <p>{{ comment.comment}}</p>
             <h4>
               <em>by: </em>
-              <span>{{ comment.name }} </span>
+              <span>{{ comment.name }}</span>
               <p style="font-size: 10px">creted on: {{comment.dateCreate | moment}}</p>
             </h4>
           </div>
@@ -93,8 +96,7 @@ export default {
         db.collection("categories")
           .doc(this.id)
           .delete()
-          .then(res => {
-            console.log(res);
+          .then(() => {
             this.$router.replace("/");
           })
           .catch(err => {
@@ -104,10 +106,10 @@ export default {
     }
   },
   filters: {
-  moment(val) {
-    return moment(val).format('MMMM Do YYYY, h:mm:ss a');
-  }
-},
+    moment(val) {
+      return moment(val).format("MMMM Do YYYY, h:mm:ss a");
+    }
+  },
   computed: {
     getPost() {
       return this.$store.state.posts.filter(post => post.uid == this.id)[0];
@@ -119,7 +121,7 @@ export default {
       return this.getPost.authorId == this.$store.state.user.uid;
     },
     currentUser() {
-      return this.$store.state.user.publicName
+      return this.$store.state.user.publicName;
     }
   },
   validations: {
@@ -202,7 +204,9 @@ h1 {
   text-align: center;
   color: #42b983;
 }
-.author a, #auth-name, h4 > span {
+.author a,
+#auth-name,
+h4 > span {
   color: orange;
 }
 #content {

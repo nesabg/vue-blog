@@ -9,14 +9,14 @@
         <h4>Phone number: {{ userData.phone }}</h4>
         <h4>Email addres: {{ userData.email }}</h4>
         <p>
-          Description:
+          <strong>Description:</strong>
           <br />
           {{ userData.description}}
         </p>
         <button id="edit">Edit profile</button>
       </div>
     </div>
-    <div class="single-post" v-for="post in posts" :key="post.uid">
+    <div class="single-post-detail" v-for="post in posts" :key="post.uid">
       <div class="post-title">
         <router-link :to="'single-post/' + post.uid">
           <h4></h4>
@@ -65,11 +65,14 @@ h1 {
   text-align: center;
   color: #42b983;
 }
-.single-post {
+#main-info {
+  margin-bottom: 30px;
+}
+.single-post-detail {
+  height: 60px;
+  margin-bottom: 15px;
   background-color: white;
   border: 1px solid #42b983;
-  padding: 20px;
-  margin-bottom: 15px;
 }
 .user-image img {
   width:  100%;

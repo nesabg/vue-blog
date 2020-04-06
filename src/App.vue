@@ -20,7 +20,10 @@ export default {
 
   data: () => ({
     //
-  })
+  }),
+  created() {
+    this.$store.dispatch("fetchPosts");
+  }
 };
 </script>
 <style>
@@ -55,8 +58,35 @@ a {
   cursor: pointer;
 }
 .single-post {
+  width: 100%;
+  height: 200px;
+  display: inline-block;
+  margin: 10px auto;
+  padding: 30px;
+  background-color: white;
+  text-align: left;
+  vertical-align: top;
+  box-shadow: 0 0 10px -6px #000000;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
   -webkit-clip-path: polygon(85% 0, 100% 13%, 100% 100%, 15% 100%, 0 86%, 0 0);
   clip-path: polygon(85% 0, 100% 13%, 100% 100%, 15% 100%, 0 86%, 0 0);
+}
+.singlePost:hover {
+  transform: scale(1.01);
+}
+.singlePost h2 a {
+  color: #42b983;
+}
+.content {
+  width: 60%;
+  padding: 20px 40px;
+  display: inline-block;
+  vertical-align: top;
+}
+.author {
+    float: right;
+    color: grey; 
 }
 </style>>
 

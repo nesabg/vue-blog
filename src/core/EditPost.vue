@@ -48,16 +48,11 @@
 </template>
 
 <script>
-import { validationMixin } from "vuelidate";
-import {
-  required,
-  minLength,
-  maxLength,
-  url
-} from "vuelidate/lib/validators";
+import createEditValidationsMixin from '../mixins/validatators';
 import { db } from '../main';
+
 export default {
-  mixins: [validationMixin],
+  mixins: [createEditValidationsMixin],
   props: ['id'],
   data() {
     return {
@@ -87,25 +82,6 @@ export default {
     this.content = data.content,
     this.imgUrl = data.imgUrl,
     this.category = data.category
-  },
-  validations: {
-    title: {
-      required,
-      minLength: minLength(3),
-      maxLength: maxLength(64)
-    },
-    content: {
-      required,
-      minLength: minLength(64),
-      maxLength: maxLength(2000)
-    },
-    imgUrl: {
-      required,
-      url
-    },
-    category: {
-      required
-    }
   }
 };
 </script>

@@ -17,7 +17,11 @@ export const store = new Vuex.Store({
     },
     isLoggedIn: false
   },
-  getters: {},
+  getters: {
+    getCategoryPost: (state) => (technology) => {
+      return state.posts.filter(p => p.category === technology);
+    }
+  },
   mutations: {
     updateUser(state, payload) {
       state.user = Object.assign({}, state.user, payload);
