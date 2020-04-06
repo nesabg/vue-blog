@@ -34,10 +34,6 @@
           <p>Add a comment to the post</p>
           <form @submit.prevent="addComment">
             <div class="form-group">
-              <label for="name">Your name</label>
-              <input id="name" type="text" v-model="name" />
-            </div>
-            <div class="form-group">
               <label for="name">Your comment</label>
               <textarea id="name" type="text" v-model="comment"></textarea>
             </div>
@@ -50,7 +46,8 @@
             <p>{{ comment.comment}}</p>
             <h4>
               <em>by: </em>
-              <span>{{ comment.name }}</span>
+              <span>{{ comment.name }} </span>
+              <p style="font-size: 10px">creted on: {{comment.dateCreate | moment}}</p>
             </h4>
           </div>
         </div>
@@ -67,27 +64,27 @@ import { db } from "../main";
 import firebase from "firebase/app";
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
+import moment from "moment";
 
 export default {
   props: ["id"],
   mixins: [validationMixin],
   data() {
     return {
-      name: "",
       comment: ""
     };
   },
   methods: {
     addComment() {
       let data = {
-        name: this.name,
-        comment: this.comment
+        name: this.currentUser,
+        comment: this.comment,
+        dateCreate: Date.now()
       };
       db.collection("categories")
         .doc(this.id)
         .update({ comments: firebase.firestore.FieldValue.arrayUnion(data) })
         .then(() => {
-          this.name = "";
           this.comment = "";
         });
     },
@@ -106,6 +103,11 @@ export default {
       }
     }
   },
+  filters: {
+  moment(val) {
+    return moment(val).format('MMMM Do YYYY, h:mm:ss a');
+  }
+},
   computed: {
     getPost() {
       return this.$store.state.posts.filter(post => post.uid == this.id)[0];
@@ -115,12 +117,12 @@ export default {
     },
     abbleToEdit() {
       return this.getPost.authorId == this.$store.state.user.uid;
+    },
+    currentUser() {
+      return this.$store.state.user.publicName
     }
   },
   validations: {
-    name: {
-      required
-    },
     comment: {
       required
     }

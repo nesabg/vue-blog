@@ -1,5 +1,5 @@
 <template>
-    <div id="wrapper">
+    <div class="wrapper">
       <div id="topicForm">
         <h1>Create post</h1>
         <form @submit.prevent="create">
@@ -110,10 +110,6 @@ export default {
 </script>
 
 <style scoped>
-#wrapper {
-  width: 1280px;
-  margin: 0 auto;
-}
 #topicForm {
   width: 50%;
   margin: 30px auto;

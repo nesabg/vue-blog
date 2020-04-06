@@ -62,7 +62,6 @@ export default {
           this.$store.state.isLoggedIn = false;
           this.$router.replace("/");
         });
-      console.log("clicked");
     }
   }
 };

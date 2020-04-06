@@ -111,10 +111,6 @@ export default {
 </script>
 
 <style scoped>
-#wrapper {
-  width: 1280px;
-  margin: 0 auto;
-}
 #topicForm {
   width: 50%;
   margin: 30px auto;

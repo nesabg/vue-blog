@@ -2,17 +2,20 @@
   <div id="main-app">
     <app-navigation></app-navigation>
     <router-view></router-view>
+    <app-footer></app-footer>
   </div>
 </template>
 
 <script>
 import Navigation from "./shared/Navigation.vue";
+import Footer from "./shared/Footer.vue";
 
 export default {
   name: "App",
 
   components: {
-    AppNavigation: Navigation
+    AppNavigation: Navigation,
+    AppFooter: Footer
   },
 
   data: () => ({
@@ -23,7 +26,7 @@ export default {
 <style>
 .wrapper {
   width: 1280px;
-  margin: 0 auto;
+  margin: 0 auto 150px auto;
 }
 a {
   text-decoration: none;

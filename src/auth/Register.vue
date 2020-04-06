@@ -156,13 +156,10 @@ export default {
 </script>
 
 <style scoped>
-#wrapper {
-  width: 1280px;
-  margin: 0 auto;
-}
+
 #regForm {
   width: 50%;
-  margin: 30px auto;
+  margin-top: 30px;
   background-color: white;
   padding: 30px;
 }

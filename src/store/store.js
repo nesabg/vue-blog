@@ -17,17 +17,10 @@ export const store = new Vuex.Store({
     },
     isLoggedIn: false
   },
-  getters:{
-
-  },
+  getters: {},
   mutations: {
-    updateUser(state, payload) { 
-      db.collection(`users`)
-        .doc(payload)
-        .get()
-        .then(res => {
-          state.user = Object.assign({}, state.user, res.data());
-        });
+    updateUser(state, payload) {
+      state.user = Object.assign({}, state.user, payload);
     },
     login(state) {
       state.isLoggedIn = true;
@@ -40,22 +33,24 @@ export const store = new Vuex.Store({
     login(context) {
       context.commit("login");
     },
-    updateUser(context, payload) {
-      context.commit("updateUser", payload);
+    updateUser({ commit }, payload) {
+      db.collection(`users`)
+        .doc(payload)
+        .get()
+        .then(res => {
+          commit("updateUser", res.data());
+        });
     },
     fetchPosts({ commit }) {
-      db.collection("categories")
-        .onSnapshot(querySnapshot => {
-          let posts = [];
-          querySnapshot.forEach(doc => {
-            let data = doc.data();
-            data.uid = doc.id;
-            posts.push(data);
-          });
-          commit("getPost", posts);
+      db.collection("categories").onSnapshot(querySnapshot => {
+        let posts = [];
+        querySnapshot.forEach(doc => {
+          let data = doc.data();
+          data.uid = doc.id;
+          posts.push(data);
         });
+        commit("getPost", posts);
+      });
     }
   }
 });
-
-//store.dispatch("fetchPosts");

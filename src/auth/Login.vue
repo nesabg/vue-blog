@@ -1,33 +1,35 @@
 <template>
-    <div class="wrapper">
-      <div id="loginForm">
-        <h1>Login to this Blog</h1>
-        <form @submit.prevent="loginHandler">
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input id="email" type="email" v-model="$v.email.$model" placeholder="Enter your email" />
-            <template v-if="$v.email.$error">
-              <p class="alert" v-if="!$v.email.required">The email is required</p>
-              <p class="alert" v-else-if="!$v.email.email">Not valid email</p>
-            </template>
-          </div>
-          <div class="form-group">
-            <label for="password">Password:</label>
-            <input
-              id="password"
-              type="password"
-              v-model="$v.password.$model"
-              placeholder="Enter your password"
-            />
-            <template v-if="$v.password.$error">
-              <p class="alert" v-if="!$v.password.required">The password is required</p>
-            </template>
-          </div>
-          <button :disabled="$v.$invalid">Login</button>
-        </form>
-        <p><router-link to="/register">Don`t have account? Register now</router-link></p>
-      </div>
+  <div class="wrapper">
+    <div id="loginForm">
+      <h1>Login to this Blog</h1>
+      <form @submit.prevent="loginHandler">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input id="email" type="email" v-model="$v.email.$model" placeholder="Enter your email" />
+          <template v-if="$v.email.$error">
+            <p class="alert" v-if="!$v.email.required">The email is required</p>
+            <p class="alert" v-else-if="!$v.email.email">Not valid email</p>
+          </template>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input
+            id="password"
+            type="password"
+            v-model="$v.password.$model"
+            placeholder="Enter your password"
+          />
+          <template v-if="$v.password.$error">
+            <p class="alert" v-if="!$v.password.required">The password is required</p>
+          </template>
+        </div>
+        <button :disabled="$v.$invalid">Login</button>
+      </form>
+      <p>
+        <router-link to="/register">Don`t have account? Register now</router-link>
+      </p>
     </div>
+  </div>
 </template>
 
 <script>
@@ -41,19 +43,22 @@ export default {
     return {
       email: "",
       password: "",
-      isLogedIn: true,
+      isLogedIn: true
     };
   },
   methods: {
     loginHandler() {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
         .then(res => {
-          this.$store.commit('login');
-            this.$store.commit('updateUser', res.user.uid);
-            this.$router.replace('/')
-        }).catch(err => {
-            alert(err);
+          this.$store.dispatch("updateUser", res.user.uid);
+          this.$store.dispatch("login");
+          this.$router.replace("/");
         })
+        .catch(err => {
+          alert(err);
+        });
     }
   },
   validations: {
@@ -105,8 +110,8 @@ button {
   font-size: 16px;
   cursor: pointer;
 }
-button:disabled {   
-    border: none;
+button:disabled {
+  border: none;
   background-color: #eee;
   color: #42b983;
   cursor: progress;
@@ -118,10 +123,10 @@ button:disabled {
   font-size: smaller;
 }
 a {
-    text-decoration: none;
-    color: #42b983;
+  text-decoration: none;
+  color: #42b983;
 }
 h1 {
-    text-align: center;
+  text-align: center;
 }
 </style>

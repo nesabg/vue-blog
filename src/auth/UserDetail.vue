@@ -7,7 +7,7 @@
       </div>
       <div class="user-meta">
         <h4>Phone number: {{ userData.phone }}</h4>
-        <h4>Email addres: {{ userData.Email }}</h4>
+        <h4>Email addres: {{ userData.email }}</h4>
         <p>
           Description:
           <br />
