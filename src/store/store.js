@@ -20,6 +20,9 @@ export const store = new Vuex.Store({
   getters: {
     getCategoryPost: (state) => (technology) => {
       return state.posts.filter(p => p.category === technology);
+    },
+    getUserInfo: (state) => {
+      return state.user;
     }
   },
   mutations: {
@@ -40,8 +43,7 @@ export const store = new Vuex.Store({
     updateUser({ commit }, payload) {
       db.collection(`users`)
         .doc(payload)
-        .get()
-        .then(res => {
+        .onSnapshot(res => {
           commit("updateUser", res.data());
         });
     },

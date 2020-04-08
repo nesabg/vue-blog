@@ -41,7 +41,7 @@
               <p class="alert" v-if="!$v.category.required">You must select a category</p>
             </template>
           </div>
-          <button :disabled="$v.$invalid">Create topic</button>
+          <button :disabled="$v.$invalid">Edit post</button>
         </form>
       </div>
     </div>

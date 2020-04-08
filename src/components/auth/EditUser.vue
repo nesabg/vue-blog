@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" id="editForm">
     <h1>Edit user info</h1>
     <form @submit.prevent="editUser">
       <div class="form-group">
@@ -49,26 +49,42 @@ import {
   url,
   decimal
 } from "vuelidate/lib/validators";
+import { db } from '@/main';
 export default {
-  props: ['phoneNumber'],
   data() {
     return {
-      // name: this.getUserData.publicName,
-      // imgUrl: this.getUserData.imgUrl,
-      // phone: this.getUserData.phone,
-      // description: this.getUserData.description
-    }
+      name: "",
+      imgUrl: "",
+      phone: "",
+      description: "",
+      uid: ''
+    };
   },
   methods: {
     editUser() {
-      console.log('clicked');
+      let data = {
+        publicName: this.name,
+        phone: this.phone,
+        imageURL: this.imgUrl,
+        description: this.description
+      };
+      console.log(db)
+      db.collection("users")
+        .doc(this.uid)
+        .set(data, { merge: true })
+        .then(() => {
+          this.$router.replace('user-detail');
+        });
     }
   },
- computed:{
-   getUserData() {
-     return this.$store.state.user
-   }
- },
+  mounted() {
+    let data = this.$store.getters.getUserInfo;
+    this.name = data.publicName;
+    this.imgUrl = data.imageURL;
+    this.phone = data.phone;
+    this.description = data.description;
+    this.uid = data.uid;
+  },
   mixins: [validationMixin],
   validations: {
     name: {
@@ -92,5 +108,63 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+#editForm {
+  width: 50%;
+  margin-top: 30px;
+  background-color: white;
+  padding: 30px;
+}
+textarea {
+  height: 80px;
+}
+input,
+textarea {
+  width: 100%;
+  padding: 7px 0;
+  margin: 0;
+  display: inline-block;
+  border: none;
+  border-bottom: 1px solid #42b983;
+}
+
+label {
+  display: inline-block;
+  font-size: 16px;
+  color: #42b983;
+  cursor: pointer;
+}
+button {
+  width: 100%;
+  margin: 10px 0;
+  padding: 7px 40px;
+  border: none;
+  display: inline-block;
+  background-color: #42b983;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+button:disabled {
+  border: none;
+  background-color: #eee;
+  color: #42b983;
+  cursor: progress;
+}
+.alert {
+  color: red;
+  padding: 0;
+  margin: 0 0 10px 0;
+  font-size: smaller;
+}
+.form-group {
+  margin: 20px 0;
+}
+a {
+  text-decoration: none;
+  color: #42b983;
+}
+h1 {
+  text-align: center;
+}
 </style>
