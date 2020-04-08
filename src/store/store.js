@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { db } from "../main";
+import { db } from "@/main";
 
 Vue.use(Vuex);
 

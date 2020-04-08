@@ -78,7 +78,7 @@ import {
   sameAs,
   decimal
 } from "vuelidate/lib/validators";
-import { db } from "../main";
+import { db } from "@/main";
 import firebase from "firebase";
 export default {
   mixins: [validationMixin],

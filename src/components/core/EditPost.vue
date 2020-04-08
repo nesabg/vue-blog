@@ -48,8 +48,8 @@
 </template>
 
 <script>
-import createEditValidationsMixin from '../mixins/validatators';
-import { db } from '../main';
+import createEditValidationsMixin from '@/mixins/validatators';
+import { db } from '@/main';
 
 export default {
   mixins: [createEditValidationsMixin],

@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import { db } from "../main";
+import { db } from "@/main";
 import firebase from "firebase/app";
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";

@@ -1,4 +1,4 @@
-<template>
+<template slot:info>
   <div class="wrapper">
     <h1>Detail page for user: {{ userData.publicName }}</h1>
     <div id="main-info">
@@ -13,7 +13,7 @@
           <br />
           {{ userData.description}}
         </p>
-        <button id="edit">Edit profile</button>
+        <router-link to="/edit-user" ><button id="edit">Edit profile</button></router-link>
       </div>
     </div>
     <div class="single-post-detail" v-for="post in posts" :key="post.uid">
