@@ -30,7 +30,7 @@ export default {
 </script>
 <style>
 .nesa-enter-active, .nesa-leave-active {
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 .nesa-enter, .nesa-leave-to {
@@ -40,11 +40,12 @@ export default {
 
 .nesa-enter-to, .nesa-leave {
   transform: translateX(0);
-  opacity: 1;
+  opacity: 1  ;
 }
 .wrapper {
   width: 1280px;
   margin: 0 auto 150px auto;
+  overflow: hidden;
 }
 a {
   text-decoration: none;
