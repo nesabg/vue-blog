@@ -1,7 +1,9 @@
 <template>
   <div id="main-app">
     <app-navigation></app-navigation>
+    <transition name="nesa">
     <router-view></router-view>
+    </transition>
     <app-footer></app-footer>
   </div>
 </template>
@@ -27,6 +29,19 @@ export default {
 };
 </script>
 <style>
+.nesa-enter-active, .nesa-leave-active {
+  transition: all .5s;
+}
+
+.nesa-enter, .nesa-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.nesa-enter-to, .nesa-leave {
+  transform: translateX(0);
+  opacity: 1;
+}
 .wrapper {
   width: 1280px;
   margin: 0 auto 150px auto;
