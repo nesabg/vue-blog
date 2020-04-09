@@ -45,7 +45,7 @@
         </div>
         <div class="comments right-side">
           <h3>Comments:</h3>
-          <div class="single-comment" v-for="(comment, i) in getPost.comments" :key="i">
+          <div class="single-comment" v-for="(comment, i) in comments" :key="i">
             <p>{{ comment.comment}}</p>
             <h4>
               <em>by: </em>
@@ -122,6 +122,9 @@ export default {
     },
     currentUser() {
       return this.$store.state.user.publicName;
+    },
+    comments() {
+      return this.getPost.comments.slice(0).reverse();
     }
   },
   validations: {
