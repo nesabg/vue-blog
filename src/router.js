@@ -12,6 +12,7 @@ import ReactPosts from "./components/core/ReactPosts.vue";
 import SinglePost from "./components/core/SinglePost.vue";
 import AngularPosts from "./components/core/AngularPosts.vue";
 import VuejsPosts from "./components/core/VuejsPosts.vue";
+import NotFound from "./components/shared/NotFound.vue";
 
 Vue.use(VueRouter);
 
@@ -90,5 +91,6 @@ export default new VueRouter({
         }
       },
     },
+    { path: '*', component: NotFound}
   ],
 });
