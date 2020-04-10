@@ -23,8 +23,11 @@ export const store = new Vuex.Store({
     },
     getUserInfo: (state) => {
       return state.user;
-    }
+    },
+    getSinglePost: (state) => (value) => {
+      return state.posts.filter(post => post.uid == value)[0]
   },
+},
   mutations: {
     updateUser(state, payload) {
       state.user = Object.assign({}, state.user, payload);

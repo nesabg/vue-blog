@@ -53,7 +53,11 @@ import { db } from '@/main';
 
 export default {
   mixins: [createEditValidationsMixin],
-  props: ['id'],
+  props: {
+    id: {
+      type: String
+    }
+  },
   data() {
     return {
       title: "",

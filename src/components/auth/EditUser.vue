@@ -68,7 +68,6 @@ export default {
         imageURL: this.imgUrl,
         description: this.description
       };
-      console.log(db)
       db.collection("users")
         .doc(this.uid)
         .set(data, { merge: true })
